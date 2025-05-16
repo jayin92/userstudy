@@ -50,7 +50,7 @@
         ]
         num_of_questions = questions.length
         
-        form_url = "https://docs.google.com/forms/d/1sWq3YiTtqRGr_rn6tYrzYZBSBEPadStHmRY6MGzGcm8/formResponse?"
+        form_url = "https://docs.google.com/forms/d/e/1FAIpQLScJXrQAklAdPYVN3DQ5kHbSjCTp_po866IwKBk-kMgfE33VHQ/formResponse?"
 
         username_entry = "entry.1926733457"
         entry_list = [
@@ -73,20 +73,20 @@
         for(let i=1; i<=4; i++) {
             data_list.push({
                 "name": `${i}`,
-                "input": `data/${i}/input.png`,
-                "ground_truth": `data/${i}/GT.mp4`,
+                "input": `data/${i}/input.jpg`,
+                "ground_truth": `data/${i}/GT_reencoded.mp4`,
                 "data": [
                     {
-                        "url": `data/${i}/sat-nerf.mp4`,
-                        "value": "sat-nerf"
+                        "url": `data/${i}/citydreamer_reencoded.mp4`,
+                        "value": "citydreamer"
                     },
                     {
-                        "url": `data/${i}/ours_pre.mp4`,
-                        "value": "ours_pre"
+                        "url": `data/${i}/gaussiancity_reencoded.mp4`,
+                        "value": "gaussiancity"
                     },
                     {
-                        "url": `data/${i}/ours.mp4`,
-                        "value": "ours"
+                        "url": `data/${i}/ours_stage2_reencoded.mp4`,
+                        "value": "ours_stage2"
                     },
                 ],
                 "Q1": null,
