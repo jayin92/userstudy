@@ -38,19 +38,19 @@
 
         questions_title = [
             // "Temporal Consistency",
-            "Geometric Accuracy",
-            "Spatial Alignment",
-            "Overall Perceptual Quality"
+            "Target Prompt Coherence",
+            "Fidelity",
+            "Overall Quality"
         ]
         questions = [
             // "Which video demonstrates better consistency between frames, with fewer flickering artifacts, disappearing objects, or sudden changes in geometry or texture?",
-            "Which video's 3D structures (buildings, terrain, objects) more accurately represent the real-world geometry when compared to the ground truth video?",
-            "Which video's layout and positioning of elements better matches the satellite imagery reference?",
-            "Considering all aspects (geometry, textures, lighting, consistency), which video presents a more convincing and high-quality 3D representation of the scene?"
+            "Which video/image most accurately follows the given text prompt and captures the intended concept or action?",
+            "Which video/image best preserves the details and visual elements from the original input image?",
+            "Which video/image demonstrates the highest overall quality, considering factors such as visual clarity, texture richness, frame consistency (for videos), and minimal artifacts?"
         ]
         num_of_questions = questions.length
         
-        form_url = "https://docs.google.com/forms/d/e/1FAIpQLScJXrQAklAdPYVN3DQ5kHbSjCTp_po866IwKBk-kMgfE33VHQ/formResponse?"
+        form_url = "https://docs.google.com/forms/d/e/1FAIpQLSepwD7GMsje2oDh0yI3vbU4Ux_e7l-HKUsRhf0go6PnI6iU_g/formResponse?"
 
         username_entry = "entry.1926733457"
         entry_list = [
@@ -58,6 +58,12 @@
             ["entry.1372537838", "entry.472180442", "entry.189779099", "entry.1174997076"],
             ["entry.879584889", "entry.1192493797", "entry.592744835", "entry.684333688"],
             ["entry.1524869044", "entry.1553191529", "entry.442712978", "entry.2004775570"],
+            ["entry.68614150", "entry.1343084118", "entry.1429650385", "entry.1035376912"],
+            ["entry.152968410", "entry.1061129843", "entry.1527083806", "entry.614949051"],
+            ["entry.1565187773", "entry.587004916", "entry.722843686", "entry.1814131732"],
+            ["entry.399690875", "entry.300182881", "entry.1673086493", "entry.1757597160"],
+            ["entry.1276943820", "entry.1399511428", "entry.144876634", "entry.811112931"],
+            ["entry.151487147", "entry.1172842876", "entry.5707384", "entry.1295513398"]
         ]
 
         data_list = [
@@ -66,27 +72,93 @@
             },
         ]
 
-        input_title = "Ground Truth"
-        obj_title = "Video"
+        input_title = "Target Prompt"
+        obj_title = "Video / Image"
         obj_width = 256
         element_type = "video" // video / image
-        for(let i=1; i<=4; i++) {
+
+        const targetPrompts = [
+            {
+                prompt: "The hand is holding a golden ball.",
+                code: "golden_ball",
+                element_type: "image"
+            },
+            {
+                prompt: "A man wearing a blue headscarf and sunglasses leans on the Great Sphinx of Giza, with one hand resting behind his neck.",
+                code: "sphinix_man",
+                element_type: "image"
+            },
+            {
+                prompt: "A man is holding a lighthouse.",
+                code: "lighthouse",
+                element_type: "video"
+            },
+            {
+                prompt: "A woman is holding a white tower with a brown base.",
+                code: "white_tower",
+                element_type: "video"
+            },
+            {
+                prompt: "A ice cream cone is holding a pisa tower model.",
+                code: "ice_cream_cone",
+                element_type: "video"
+            },
+            {
+                prompt: "A hand is holding a stone.",
+                code: "stone",
+                element_type: "image"
+            },
+            {
+                prompt: "A hand is holding the Eiffel Tower model.",
+                code: "eiffel_tower_on_hand",
+                element_type: "video"
+            },
+            {
+                prompt: "A plastic water bottle spouting water towards the Merlion statue in Singapore.",
+                code: "water_lion",
+                element_type: "image"
+            },
+            {
+                prompt: "A hand in the foreground holds a toy yellow car.",
+                code: "car",
+                element_type: "image"
+            },
+            {
+                prompt: "A ice cream cone is holding the base of the pisa tower.",
+                code: "ice_cream_cone_3",
+                element_type: "image"
+            }
+        ];
+        for(let i=1; i<=10; i++) {
             data_list.push({
                 "name": `${i}`,
                 "input": `data/${i}/input.jpg`,
-                "ground_truth": `data/${i}/GT_reencoded.mp4`,
+                "ground_truth": targetPrompts[i-1].prompt,
+                "element_type": targetPrompts[i-1].element_type,
                 "data": [
                     {
-                        "url": `data/${i}/citydreamer_reencoded.mp4`,
-                        "value": "citydreamer"
+                        "url": `data/${i}/FLUX_NO_UG`,
+                        "value": "FLUX_NO_UG"
                     },
                     {
-                        "url": `data/${i}/gaussiancity_reencoded.mp4`,
-                        "value": "gaussiancity"
+                        "url": `data/${i}/FLUX_UG`,
+                        "value": "FLUX_UG"
                     },
                     {
-                        "url": `data/${i}/ours_stage2_reencoded.mp4`,
-                        "value": "ours_stage2"
+                        "url": `data/${i}/gp_dds`,
+                        "value": "gp_dds"
+                    },
+                    {
+                        "url": `data/${i}/gp`,
+                        "value": "gp"
+                    },
+                    {
+                        "url": `data/${i}/ours`,
+                        "value": "ours"
+                    },
+                    {
+                        "url": `data/${i}/stable_flow`,
+                        "value": "stable_flow"
                     },
                 ],
                 "Q1": null,

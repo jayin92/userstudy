@@ -70,5 +70,16 @@ fieldset {
 .video-row {
     display: flex;
     justify-content: center; /* 讓內容置中 */
-    gap: 20px; /* 影片之間的間距 */
+    gap: 10px; /* 影片之間的間距 */
+}
+
+.target-prompt {
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }

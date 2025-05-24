@@ -117,9 +117,10 @@ function renderObjects(now) {
     } else {
         let imgs_element = ""
         for(let i = 1; i <= num_of_selection; i++){
+            extension = data_list[now]['element_type'] === "video" ? "mp4" : "jpg";
             imgs_element += `
                 <div class="input-object">
-                    ${generateElements(data_list[now]['data'][i-1]['url'], 300, element_type)}
+                    ${generateElements(data_list[now]['data'][i-1]['url'] + `.${extension}`, obj_width, data_list[now]['element_type'])}
                     <div class="titles">${obj_title} ${i}</div>
                 </div>
             `
@@ -131,12 +132,12 @@ function renderObjects(now) {
                     <div class="video-row">
                         <div class="input-object">
                             ${generateElements(data_list[now]['input'], obj_width, "image")}
-                            <div class="titles">Satellite Imagery Reference</div>
+                            <div class="titles">Input Image</div>
                         </div>
                         <div class="input-object">
-                            <video height="256" controls loop autoplay>
-                                <source src="${data_list[now]['ground_truth']}" type="video/mp4" />
-                            </video>
+                            <div class="target-prompt">
+                                <p>${data_list[now]['ground_truth']}</p>
+                            </div>
                             <div class="titles">${input_title}</div>
                         </div>
                     </div>
