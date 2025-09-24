@@ -101,6 +101,34 @@
                 "Q4": null,
             })
         }
+
+        // Data for sets 5-8 (with different values)
+        for (let i = 5; i <= 8; i++) {
+            data_list.push({
+                "name": `${i}`,
+                // "input": `data/${i}/input.jpg`,
+                "input": [`data/${i}/input1.jpg`, `data/${i}/input2.jpg`],
+                "ground_truth": `data/${i}/GT.mp4`,
+                "data": [
+                    {
+                        "url": `data/${i}/corgs.mp4`,
+                        "value": "corgs"
+                    },
+                    {
+                        "url": `data/${i}/sat-nerf.mp4`,
+                        "value": "sat-nerf"
+                    },
+                    {
+                        "url": `data/${i}/ours_stage2.mp4`,
+                        "value": "ours_stage2"
+                    },
+                ],
+                "Q1": null,
+                "Q2": null,
+                "Q3": null,
+                "Q4": null,
+            })
+        }
         num_of_selection = data_list[1]['data'].length
 
         for (let i = 1; i < data_list.length; i++) {
