@@ -116,7 +116,9 @@ function renderObjects(now) {
         document.getElementById("images").innerHTML = txt;
     } else {
         let imgs_element = ""
+        num_of_selection = data_list[now]['data'].length
         for (let i = 1; i <= num_of_selection; i++) {
+            console.log(data_list[now]['data'][i - 1])
             imgs_element += `
                 <div class="input-object">
                     ${generateElements(data_list[now]['data'][i - 1]['url'], 300, element_type)}
