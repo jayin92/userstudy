@@ -89,14 +89,14 @@ function shuffle(array) {
 function generateElements(data, width, type) {
     if (type === "video") {
         return `
-            <video width="${width}" controls loop autoplay>
+            <video controls loop autoplay muted playsinline>
                 <source src="${data}" type="video/mp4" />
             </video>
         `
     }
     else if (type === "image") {
         return `
-            <img src="${data}" width="${width}"/>
+            <img src="${data}" />
         `
     }
 }
@@ -120,7 +120,7 @@ function renderObjects(now) {
         for (let i = 1; i <= num_of_selection; i++) {
             console.log(data_list[now]['data'][i - 1])
             imgs_element += `
-                <div class="input-object">
+                <div class="input-object variant-object">
                     ${generateElements(data_list[now]['data'][i - 1]['url'], 300, element_type)}
                     <div class="titles">${obj_title} ${i}</div>
                 </div>
@@ -131,7 +131,7 @@ function renderObjects(now) {
         const inputs = Array.isArray(data_list[now]['input']) ? data_list[now]['input'] : [data_list[now]['input']];
         for (let i = 0; i < inputs.length; i++) {
             input_imgs_element += `
-                <div class="input-object">
+                <div class="input-object reference-object">
                     ${generateElements(inputs[i], obj_width, "image")}
                     <div class="titles">Satellite Imagery References</div>
                 </div>
@@ -143,8 +143,8 @@ function renderObjects(now) {
                 <label for="${data_list[now]["name"]}">
                     <div class="video-row">
                         ${input_imgs_element}
-                        <div class="input-object">
-                            <video height="256" controls loop autoplay>
+                        <div class="input-object reference-object">
+                            <video controls loop autoplay muted playsinline>
                                 <source src="${data_list[now]['ground_truth']}" type="video/mp4" />
                             </video>
                             <div class="titles">${input_title}</div>

@@ -14,7 +14,7 @@
     </div>
     <br>
     <form>
-        <fieldset id="question" style="width:600px;">
+        <fieldset id="question">
             <legend><b id="text_prompt"></b></legend>
             <div id="questions"></div>
         </fieldset>
@@ -52,18 +52,18 @@
         ]
         num_of_questions = questions.length
 
-        form_url = "https://docs.google.com/forms/d/e/1FAIpQLSeUnxPpmi_hLnKYycRcHCe68vBc8A5Tp6x8gGQlW16BiXAcEA/formResponse?"
+        form_url = "https://docs.google.com/forms/d/e/1FAIpQLSdoa3bd0i0AwEf86z2aOHYZ6fH1_U4ieOiOFJ52oJ72XY5CYA/formResponse?"
 
         username_entry = "entry.1926733457"
         entry_list = [
-            ["entry.2125490581", "entry.2080099033", "entry.787853927", "entry.181565463"],
-            ["entry.1372537838", "entry.472180442", "entry.189779099", "entry.1174997076"],
-            ["entry.879584889", "entry.1192493797", "entry.592744835", "entry.684333688"],
-            ["entry.1524869044", "entry.1553191529", "entry.442712978", "entry.2004775570"],
-            ["entry.459639323", "entry.14054445", "entry.1255667729", "entry.178374937"],
-            ["entry.1228908790", "entry.1706941327", "entry.765614879", "entry.1873585946"],
-            ["entry.836294517", "entry.1629105787", "entry.1975311352", "entry.641951612"],
-            ["entry.744875101", "entry.1475599666", "entry.1155476698", "entry.920223950"]
+            ["entry.2125490581", "entry.2080099033", "entry.787853927",  "entry.181565463"],  // set 1
+            ["entry.1372537838", "entry.472180442",  "entry.189779099",  "entry.1174997076"], // set 2
+            ["entry.879584889",  "entry.1192493797", "entry.592744835",  "entry.684333688"],  // set 3
+            ["entry.1524869044", "entry.1553191529", "entry.442712978",  "entry.2004775570"], // set 4
+            ["entry.1733598989", "entry.14054445",   "entry.1255667729", "entry.178374937"],  // set 5
+            ["entry.1228908790", "entry.1706941327", "entry.765614879",  "entry.1873585946"], // set 6
+            ["entry.836294517",  "entry.1629105787", "entry.1975311352", "entry.641951612"],  // set 7
+            ["entry.744875101",  "entry.1475599666", "entry.1155476698", "entry.920223950"],  // set 8
         ]
 
         data_list = [
@@ -93,6 +93,10 @@
                     {
                         "url": `data/${i}/corgs_reencoded.mp4`,
                         "value": "corgs"
+                    },
+                    {
+                        "url": `data/${i}/mip_splatting_reencoded.mp4`,
+                        "value": "mip_splatting"
                     },
                     {
                         "url": `data/${i}/ours_stage2_reencoded.mp4`,
@@ -125,6 +129,10 @@
                     {
                         "url": `data/${i}/sat-nerf.mp4`,
                         "value": "sat-nerf"
+                    },
+                    {
+                        "url": `data/${i}/mip-splatting.mp4`,
+                        "value": "mip-splatting"
                     },
                     {
                         "url": `data/${i}/ours_stage2.mp4`,

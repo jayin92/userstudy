@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git config:*)",
+      "Bash(ffprobe:*)",
+      "Bash(ffmpeg:*)",
+      "WebFetch(domain:docs.google.com)"
+    ]
+  }
+}
