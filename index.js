@@ -89,7 +89,7 @@ function shuffle(array) {
 function generateElements(data, width, type) {
     if (type === "video") {
         return `
-            <video controls loop muted playsinline>
+            <video loop muted playsinline>
                 <source src="${data}" type="video/mp4" />
             </video>
         `
@@ -151,7 +151,7 @@ function renderObjects(now) {
                     <div class="video-row">
                         ${input_imgs_element}
                         <div class="input-object reference-object">
-                            <video controls loop muted playsinline>
+                            <video loop muted playsinline>
                                 <source src="${data_list[now]['ground_truth']}" type="video/mp4" />
                             </video>
                             <div class="titles">${input_title}</div>
