@@ -89,7 +89,7 @@ function shuffle(array) {
 function generateElements(data, width, type) {
     if (type === "video") {
         return `
-            <video controls loop autoplay muted playsinline>
+            <video controls loop muted playsinline>
                 <source src="${data}" type="video/mp4" />
             </video>
         `
@@ -99,6 +99,29 @@ function generateElements(data, width, type) {
             <img src="${data}" />
         `
     }
+}
+
+function syncVideos() {
+    const videos = Array.from(document.querySelectorAll('video'));
+    if (videos.length === 0) return;
+
+    let readyCount = 0;
+
+    function checkAndPlay() {
+        readyCount++;
+        if (readyCount === videos.length) {
+            videos.forEach(v => { v.currentTime = 0; });
+            Promise.all(videos.map(v => v.play())).catch(() => {});
+        }
+    }
+
+    videos.forEach(v => {
+        if (v.readyState >= 3) {
+            checkAndPlay();
+        } else {
+            v.addEventListener('canplay', checkAndPlay, { once: true });
+        }
+    });
 }
 
 function renderObjects(now) {
@@ -144,7 +167,7 @@ function renderObjects(now) {
                     <div class="video-row">
                         ${input_imgs_element}
                         <div class="input-object reference-object">
-                            <video controls loop autoplay muted playsinline>
+                            <video controls loop muted playsinline>
                                 <source src="${data_list[now]['ground_truth']}" type="video/mp4" />
                             </video>
                             <div class="titles">${input_title}</div>
@@ -159,6 +182,7 @@ function renderObjects(now) {
         `;
 
         document.getElementById("images").innerHTML = txt;
+        syncVideos();
         document.getElementById("text_prompt").innerHTML = `Questions`
         renderQuestions();
         document.getElementById("num_page").innerHTML = `${now}/${data_list.length - 1}`;
