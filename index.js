@@ -104,24 +104,8 @@ function generateElements(data, width, type) {
 function syncVideos() {
     const videos = Array.from(document.querySelectorAll('video'));
     if (videos.length === 0) return;
-
-    let readyCount = 0;
-
-    function checkAndPlay() {
-        readyCount++;
-        if (readyCount === videos.length) {
-            videos.forEach(v => { v.currentTime = 0; });
-            Promise.all(videos.map(v => v.play())).catch(() => {});
-        }
-    }
-
-    videos.forEach(v => {
-        if (v.readyState >= 3) {
-            checkAndPlay();
-        } else {
-            v.addEventListener('canplay', checkAndPlay, { once: true });
-        }
-    });
+    videos.forEach(v => { v.pause(); v.currentTime = 0; });
+    Promise.all(videos.map(v => v.play())).catch(() => {});
 }
 
 function renderObjects(now) {
@@ -175,6 +159,14 @@ function renderObjects(now) {
                     </div>
                     <br/>
                 </label>
+                <div style="text-align:center; margin: 8px 0;">
+                    <button onclick="syncVideos()" style="
+                        background: black; color: white; border: none;
+                        padding: 10px 24px; font-size: 15px;
+                        border-radius: 5px; cursor: pointer;">
+                        ▶ Sync Play
+                    </button>
+                </div>
                 <div class="video-row">
                     ${imgs_element}
                 </div>
@@ -182,7 +174,6 @@ function renderObjects(now) {
         `;
 
         document.getElementById("images").innerHTML = txt;
-        syncVideos();
         document.getElementById("text_prompt").innerHTML = `Questions`
         renderQuestions();
         document.getElementById("num_page").innerHTML = `${now}/${data_list.length - 1}`;
